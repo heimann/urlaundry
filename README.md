@@ -1,4 +1,4 @@
-# URLaundry
+# [URLaundry](https://urlaundry.dmeh.net) 
 
 A simple web tool for cleaning tracking parameters from URLs, making them more private and shareable.
 

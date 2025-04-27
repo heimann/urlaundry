@@ -1,5 +1,3 @@
-import "./App.css"; /* App.tsx – SolidJS */
-/* App.tsx */
 /* App.tsx */
 import { createSignal, onMount } from "solid-js";
 
@@ -178,41 +176,55 @@ export default function App() {
           <h1 class="text-2xl font-semibold mb-2">URLaundry</h1>
           <p class="text-neutral-400">
             Clean your URLs by removing tracking parameters and other clutter.
-            <br />All processing happens locally in your browser.
+            <br />
+            All processing happens locally in your browser.
           </p>
         </div>
         <form class="flex w-full flex-col gap-4" onSubmit={handleClean}>
-        {/* input + button */}
-        <div class="flex gap-3">
-          <input
-            ref={(el) => (input = el)}
-            type="url"
-            placeholder="paste url here →"
-            value={url()}
-            onInput={(e) => setUrl(e.currentTarget.value)}
-            class="flex-1 bg-transparent border-b border-neutral-600 px-2 py-2 text-sm placeholder-neutral-500 focus:border-neutral-300 focus:outline-none"
-          />
-          <button
-            type="submit"
-            class="shrink-0 w-24 border border-neutral-600 px-4 py-2 text-xs uppercase tracking-wide
+          {/* input + button */}
+          <div class="flex gap-3">
+            <input
+              ref={(el) => (input = el)}
+              type="url"
+              placeholder="paste url here →"
+              value={url()}
+              onInput={(e) => setUrl(e.currentTarget.value)}
+              class="flex-1 bg-transparent border-b border-neutral-600 px-2 py-2 text-sm placeholder-neutral-500 focus:border-neutral-300 focus:outline-none"
+            />
+            <button
+              type="submit"
+              class="shrink-0 w-24 border border-neutral-600 px-4 py-2 text-xs uppercase tracking-wide
             hover:bg-neutral-200 hover:text-neutral-900
             focus:outline-none focus:ring-2 focus:ring-neutral-400 transition-colors"
-          >
-            {copied() ? "📋" : "clean"}
-          </button>
-        </div>
-
-        {/* show result */}
-        {cleaned() && (
-          <div class="mt-4 rounded border border-neutral-700 p-4 text-sm space-y-1">
-            <div class="font-semibold text-green-400">✅ Cleaned</div>
-            <div class="text-neutral-400">
-              Removed {removed()} param{removed() !== 1 && "s"}
-            </div>
-            <div class="break-all text-neutral-300">{cleaned()}</div>
+            >
+              {copied() ? "📋" : "clean"}
+            </button>
           </div>
-        )}
-      </form>
+
+          {/* show result */}
+          {cleaned() && (
+            <div class="mt-4 rounded border border-neutral-700 p-4 text-sm space-y-1">
+              <div class="font-semibold text-green-400">✅ Cleaned</div>
+              <div class="text-neutral-400">
+                Removed {removed()} param{removed() !== 1 && "s"}
+              </div>
+              <div class="break-all text-neutral-300">{cleaned()}</div>
+            </div>
+          )}
+        </form>
+
+        {/* Footer with credit */}
+        <div class="mt-8 text-center text-sm text-neutral-500">
+          Made by{" "}
+          <a
+            href="https://dmeh.net"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="border-b border-neutral-600 hover:border-neutral-400 text-neutral-400 hover:text-neutral-300 transition-colors"
+          >
+            David Heimann
+          </a>
+        </div>
       </div>
     </main>
   );

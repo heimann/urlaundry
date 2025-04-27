@@ -216,10 +216,13 @@ export default function App() {
             }}
           >
             <span 
-              class="block w-4 h-4 rounded-full bg-white"
+              class="block w-4 h-4 rounded-full"
               style={{
+                backgroundColor: darkMode() ? "#fff" : "#222",
+                border: "1px solid #555",
                 transform: darkMode() ? "translateX(0)" : "translateX(24px)",
-                transition: "transform 0.2s"
+                transition: "transform 0.2s",
+                boxShadow: "0 1px 2px rgba(0,0,0,0.2)"
               }}
             ></span>
           </span>

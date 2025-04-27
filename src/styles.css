@@ -29,14 +29,6 @@
   -webkit-text-size-adjust: 100%;
 }
 
-a {
-  @apply text-secondary font-medium;
-}
-
-a:hover {
-  @apply text-secondary underline;
-}
-
 #theme-toggle {
   @apply text-text/70 transition-colors duration-200 ease-in-out;
   background: transparent;

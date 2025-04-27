@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap");
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-mono: Inconsolata, Menlo, Monaco, Consolas, "Courier New", monospace;
+
+  /* Light mode colors */
+  --color-bg: #f3f2f7;
+  --color-text: #0f0e10;
+  --color-primary: #a08af0;
+  --color-secondary: #340bcb;
+}
+
+/* Dark mode colors */
+:where(.dark, .dark *) {
+  --color-bg: #09080d;
+  --color-text: #efeef0;
+  --color-primary: #5d34f4;
+  --color-secondary: #250f75;
+}
+
+:root {
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  @apply text-secondary font-medium;
+}
+
+a:hover {
+  @apply text-secondary underline;
+}
+
+#theme-toggle {
+  @apply text-text/70 transition-colors duration-200 ease-in-out;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+#theme-toggle:hover {
+  @apply text-secondary cursor-pointer;
+}

@@ -222,7 +222,7 @@ export default function App() {
                 border: "1px solid #555",
                 transform: darkMode() ? "translateX(0)" : "translateX(24px)",
                 transition: "transform 0.2s",
-                boxShadow: "0 1px 2px rgba(0,0,0,0.2)"
+                filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.2))"
               }}
             ></span>
           </span>

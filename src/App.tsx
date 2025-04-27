@@ -120,11 +120,21 @@ export default function App() {
   const [cleaned, setCleaned] = createSignal("");
   const [removed, setRemoved] = createSignal(0);
   const [copied, setCopied] = createSignal(false);
+  const [darkMode, setDarkMode] = createSignal(true);
   let input!: HTMLInputElement;
 
-  /* autofocus + clipboard bootstrap */
+  /* autofocus + clipboard bootstrap + theme detection */
   onMount(async () => {
+    // Focus the input field
     input.focus();
+    
+    // Check for system preference (default to dark if can't detect)
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      setDarkMode(false);
+      document.body.classList.remove('dark');
+    }
+    
+    // Check clipboard for URLs
     try {
       const clip = await navigator.clipboard.readText();
       if (isValidUrl(clip)) setUrl(clip);
@@ -132,6 +142,17 @@ export default function App() {
       /* ignore permission errors */
     }
   });
+
+  function toggleTheme() {
+    const newMode = !darkMode();
+    setDarkMode(newMode);
+    
+    if (newMode) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }
 
   async function handleClean(e?: Event) {
     e?.preventDefault();
@@ -169,12 +190,25 @@ export default function App() {
   }
 
   return (
-    /*  no bg-color here → no pillar  */
-    <main class="min-h-screen flex justify-center px-6 pt-24 font-mono text-neutral-200">
+    /*  Main container with dynamic styles based on theme */
+    <main class={`min-h-screen flex justify-center px-6 pt-24 font-mono transition-colors duration-300 ${darkMode() ? 'bg-neutral-900 text-neutral-200' : 'bg-neutral-100 text-neutral-800'}`}>
+      {/* Theme toggle button - positioned absolutely */}
+      <button 
+        onClick={toggleTheme} 
+        class={`absolute top-4 right-4 px-3 py-1 border text-sm transition-colors ${
+          darkMode() 
+            ? 'border-neutral-600 text-neutral-400 hover:text-neutral-300 hover:border-neutral-500' 
+            : 'border-neutral-400 text-neutral-600 hover:text-neutral-700 hover:border-neutral-500'
+        }`}
+        aria-label={darkMode() ? "Switch to light mode" : "Switch to dark mode"}
+      >
+        {darkMode() ? "☀️" : "🌙"}
+      </button>
+      
       <div class="flex w-full max-w-2xl flex-col gap-6">
         <div class="text-center">
           <h1 class="text-2xl font-semibold mb-2">URLaundry</h1>
-          <p class="text-neutral-400">
+          <p class={darkMode() ? "text-neutral-400" : "text-neutral-600"}>
             Clean your URLs by removing tracking parameters and other clutter.
             <br />
             All processing happens locally in your browser.
@@ -189,13 +223,20 @@ export default function App() {
               placeholder="paste url here →"
               value={url()}
               onInput={(e) => setUrl(e.currentTarget.value)}
-              class="flex-1 bg-transparent border-b border-neutral-600 px-2 py-2 text-sm placeholder-neutral-500 focus:border-neutral-300 focus:outline-none"
+              class={`flex-1 bg-transparent border-b px-2 py-2 text-sm focus:outline-none transition-colors ${
+                darkMode() 
+                  ? 'border-neutral-600 placeholder-neutral-500 focus:border-neutral-300' 
+                  : 'border-neutral-400 placeholder-neutral-500 focus:border-neutral-700'
+              }`}
             />
             <button
               type="submit"
-              class="shrink-0 w-24 border border-neutral-600 px-4 py-2 text-xs uppercase tracking-wide
-            hover:bg-neutral-200 hover:text-neutral-900
-            focus:outline-none focus:ring-2 focus:ring-neutral-400 transition-colors"
+              class={`shrink-0 w-24 border px-4 py-2 text-xs uppercase tracking-wide
+              focus:outline-none focus:ring-2 transition-colors ${
+                darkMode()
+                  ? 'border-neutral-600 hover:bg-neutral-200 hover:text-neutral-900 focus:ring-neutral-400'
+                  : 'border-neutral-400 hover:bg-neutral-800 hover:text-neutral-100 focus:ring-neutral-600'
+              }`}
             >
               {copied() ? "📋" : "clean"}
             </button>
@@ -203,24 +244,32 @@ export default function App() {
 
           {/* show result */}
           {cleaned() && (
-            <div class="mt-4 rounded border border-neutral-700 p-4 text-sm space-y-1">
-              <div class="font-semibold text-green-400">✅ Cleaned</div>
-              <div class="text-neutral-400">
+            <div class={`mt-4 rounded border p-4 text-sm space-y-1 transition-colors ${
+              darkMode() ? 'border-neutral-700' : 'border-neutral-300'
+            }`}>
+              <div class="font-semibold text-green-500">✅ Cleaned</div>
+              <div class={darkMode() ? 'text-neutral-400' : 'text-neutral-600'}>
                 Removed {removed()} param{removed() !== 1 && "s"}
               </div>
-              <div class="break-all text-neutral-300">{cleaned()}</div>
+              <div class={`break-all ${darkMode() ? 'text-neutral-300' : 'text-neutral-700'}`}>
+                {cleaned()}
+              </div>
             </div>
           )}
         </form>
 
         {/* Footer with credit */}
-        <div class="mt-8 text-center text-sm text-neutral-500">
+        <div class={`mt-8 text-center text-sm ${darkMode() ? 'text-neutral-500' : 'text-neutral-500'}`}>
           Made by{" "}
           <a
             href="https://dmeh.net"
             target="_blank"
             rel="noopener noreferrer"
-            class="border-b border-neutral-600 hover:border-neutral-400 text-neutral-400 hover:text-neutral-300 transition-colors"
+            class={`border-b hover:border-neutral-400 transition-colors ${
+              darkMode() 
+                ? 'border-neutral-600 text-neutral-400 hover:text-neutral-300' 
+                : 'border-neutral-400 text-neutral-600 hover:text-neutral-700'
+            }`}
           >
             David Heimann
           </a>

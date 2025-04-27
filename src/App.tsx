@@ -209,7 +209,7 @@ export default function App() {
             class="sr-only" // Visually hidden but accessible
           />
           <span 
-            class="block w-12 h-6 rounded-full p-1"
+            class="flex items-center w-12 h-6 rounded-full px-1"
             style={{
               backgroundColor: darkMode() ? "#444" : "#ddd",
               border: "1px solid #555"

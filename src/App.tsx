@@ -173,7 +173,15 @@ export default function App() {
   return (
     /*  no bg-color here → no pillar  */
     <main class="min-h-screen flex justify-center px-6 pt-24 font-mono text-neutral-200">
-      <form class="flex w-full max-w-2xl flex-col gap-4" onSubmit={handleClean}>
+      <div class="flex w-full max-w-2xl flex-col gap-6">
+        <div class="text-center">
+          <h1 class="text-2xl font-semibold mb-2">URLaundry</h1>
+          <p class="text-neutral-400">
+            Clean your URLs by removing tracking parameters and other clutter.
+            <br />All processing happens locally in your browser.
+          </p>
+        </div>
+        <form class="flex w-full flex-col gap-4" onSubmit={handleClean}>
         {/* input + button */}
         <div class="flex gap-3">
           <input
@@ -205,6 +213,7 @@ export default function App() {
           </div>
         )}
       </form>
+      </div>
     </main>
   );
 }

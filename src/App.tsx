@@ -143,8 +143,15 @@ export default function App() {
     }
   });
 
-  function toggleTheme() {
-    const newMode = !darkMode();
+  function toggleTheme(e?: Event) {
+    // If the function is called from the onChange event, use the checkbox value
+    let newMode;
+    if (e && e.target && 'checked' in e.target) {
+      newMode = !(e.target as HTMLInputElement).checked;
+    } else {
+      newMode = !darkMode();
+    }
+    
     setDarkMode(newMode);
     
     if (newMode) {
@@ -192,18 +199,32 @@ export default function App() {
   return (
     /*  Main container with dynamic styles based on theme */
     <main class={`min-h-screen flex justify-center px-6 pt-24 font-mono transition-colors duration-300 ${darkMode() ? 'bg-neutral-900 text-neutral-200' : 'bg-neutral-100 text-neutral-800'}`}>
-      {/* Theme toggle button - positioned absolutely */}
-      <button 
-        onClick={toggleTheme} 
-        class={`absolute top-4 right-4 px-3 py-1 border text-sm transition-colors ${
-          darkMode() 
-            ? 'border-neutral-600 text-neutral-400 hover:text-neutral-300 hover:border-neutral-500' 
-            : 'border-neutral-400 text-neutral-600 hover:text-neutral-700 hover:border-neutral-500'
-        }`}
-        aria-label={darkMode() ? "Switch to light mode" : "Switch to dark mode"}
-      >
-        {darkMode() ? "☀️" : "🌙"}
-      </button>
+      {/* Super simple theme toggle */}
+      <div class="absolute top-4 right-4">
+        <label class="inline-block cursor-pointer">
+          <input 
+            type="checkbox" 
+            checked={!darkMode()} 
+            onChange={toggleTheme}
+            class="sr-only" // Visually hidden but accessible
+          />
+          <span 
+            class="block w-12 h-6 rounded-full p-1"
+            style={{
+              backgroundColor: darkMode() ? "#444" : "#ddd",
+              border: "1px solid #555"
+            }}
+          >
+            <span 
+              class="block w-4 h-4 rounded-full bg-white"
+              style={{
+                transform: darkMode() ? "translateX(0)" : "translateX(24px)",
+                transition: "transform 0.2s"
+              }}
+            ></span>
+          </span>
+        </label>
+      </div>
       
       <div class="flex w-full max-w-2xl flex-col gap-6">
         <div class="text-center">

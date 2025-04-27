@@ -1,28 +1,36 @@
+# URLaundry
+
+A simple web tool for cleaning tracking parameters from URLs, making them more private and shareable.
+
+## Features
+
+- Instantly cleans URLs by removing unnecessary tracking parameters
+- Preserves important parameters based on domain
+- Automatically copies the cleaned URL to clipboard
+- Shows how many parameters were removed
+- Auto-detects URLs from clipboard on load
+
 ## Usage
 
+1. Paste a URL into the input field
+2. Click the "clean" button
+3. Get your clean URL, automatically copied to clipboard
+
+## Development
+
+This project uses SolidJS with Vite and is built with Bun.
+
 ```bash
-$ npm install # or pnpm install or yarn install
+# Install dependencies
+bun install
+
+# Run development server
+bun run dev
+
+# Build for production
+bun run build
 ```
-
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm run dev`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
-
-### `npm run build`
-
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
 ## Deployment
 
-Learn more about deploying your application with the [documentations](https://vite.dev/guide/static-deploy.html)
+This project is deployed on Cloudflare Pages.

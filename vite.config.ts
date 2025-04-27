@@ -4,4 +4,5 @@ import solid from 'vite-plugin-solid'
 
 export default defineConfig({
   plugins: [solid(), tailwindcss()],
+  base: './' // This ensures assets are referenced with relative paths
 })

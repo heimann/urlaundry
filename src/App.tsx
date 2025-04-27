@@ -211,14 +211,14 @@ export default function App() {
           <span 
             class="flex items-center w-12 h-6 rounded-full px-1"
             style={{
-              backgroundColor: darkMode() ? "#444" : "#ddd",
+              background: darkMode() ? "#444" : "#ddd",
               border: "1px solid #555"
             }}
           >
             <span 
               class="block w-4 h-4 rounded-full"
               style={{
-                backgroundColor: darkMode() ? "#fff" : "#222",
+                background: darkMode() ? "#fff" : "#222",
                 border: "1px solid #555",
                 transform: darkMode() ? "translateX(0)" : "translateX(24px)",
                 transition: "transform 0.2s",

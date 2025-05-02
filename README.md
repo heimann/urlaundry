@@ -25,11 +25,17 @@ This project uses SolidJS with Vite and is built with Bun.
 bun install
 
 # Run development server
+just dev
+# or
 bun run dev
 
 # Build for production
+just build
+# or
 bun run build
 ```
+
+This project uses [just](https://github.com/casey/just) as a command runner. See the `justfile` for available commands.
 
 ## Deployment
 
